@@ -2,17 +2,34 @@ var wombleList = require('./templates/womble-list.hbs')
 var detailsTemplate = require('./templates/details.hbs')
 
 document.addEventListener('DOMContentLoaded', function () {
+  var header = {
+    title: 'Wombles',
+    subtitle: 'The wombliest of all in the animal kingdom'
+  }
   var wombles = [
-    { name: 'Orinocco', email: 'orinocco@wimbledoncommon.net', details: 'Tin cans' },
+    { name: 'Orinocco', email: 'orinocco@wimbledoncommon.net', details: 'Tin cans'},
     { name: 'Tomsk', email: 'tomsk@wimbledoncommon.net', details: 'Plastic bags' },
     { name: 'Bungo', email: 'bungo@wimbledoncommon.net', details: 'Discarded wombat poop' }
   ]
-  refreshContent(wombles)
+  var footer = {
+    copyright: 'all copyrights belong to wombats',
+    contact: 'wombats are unavailable for contact atm'
+  }
+  var links = [
+    { address: 'www.google.com', link: 'google'},
+    { address: 'www.facebook.com', link: 'facebook'}
+  ]
+  refreshContent(header, wombles, footer, links)
 })
 
-function refreshContent (wombles) {
+function refreshContent (header, wombles, footer, links) {
   var div = document.createElement('div')
-  div.innerHTML = wombleList({ wombles: wombles })
+  div.innerHTML = wombleList({
+    header: header,
+    wombles: wombles,
+    footer: footer,
+    links: links
+  })
   document.body.appendChild(div)
   bindEventListeners(wombles)
 }
